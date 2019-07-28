@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>掲示板</title>
+</head>
+<body>
+<h1>聡明舎 共有掲示板</h1>
+<section>
+    <h2>新規投稿</h2>
+    <form method="post" action="/index" th:object="${messageForm}">
+        <div class="name">
+            <span class="label">名前:</span><input type="text" th:field="*{name}">
+        </div>
+        <br/>
+        <div class="message">
+            <span class="label">本文:</span><textarea cols="50" rows="3" wrap="hard" th:field="*{message}"></textarea>
+
+        </div>
+        <input type="submit" value="投稿">
+    </form>
+</section>
+<section class="posts">
+    <h2>投稿一覧</h2>
+    <article>
+        <div class="sample_box8" th:each="message : ${messageList}">
+            <p th:text="${message.auto_no}"></p>
+            <h3 th:text="${message.name}"></h3>
+            <time th:text="${#dates.format(message.date, 'YYYY年M月d日H時m分')}"></time>
+            <p>
+            <th:block th:if="${message.message}">
+                <th:block th:each="str, stat : ${message.message.split('\r\n|\r|\n', -1)}">
+                    <th:block th:text="${str}"/>
+                    <br th:if="${!stat.last}"/>
+                </th:block>
+            </th:block>
+            <br/>
+            </p>
+        </div>
+    </article>
+</section>
+</body>
+</html>
