@@ -26,7 +26,7 @@ public class BbsDaoJdbcImpl implements BbsDao {
         int rowNumber = jdbc.update("INSERT INTO message(name,"
                 + " message,"
                 + " date)"
-                + " VALUES (?, ?, current_timestamp)"
+                + " VALUES (?, ?, current_timestamp AT TIME ZONE 'Asia/Tokyo')"
                 ,message.getName()
                 ,message.getMessage());
 
