@@ -26,10 +26,9 @@ public class BbsDaoJdbcImpl implements BbsDao {
         int rowNumber = jdbc.update("INSERT INTO message(name,"
                 + " message,"
                 + " date)"
-                + " VALUES (?, ?, ?)"
+                + " VALUES (?, ?, current_timestamp)"
                 ,message.getName()
-                ,message.getMessage()
-                ,message.getDate());
+                ,message.getMessage());
 
         return rowNumber;
     }
