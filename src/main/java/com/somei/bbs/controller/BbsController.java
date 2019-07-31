@@ -40,6 +40,7 @@ public class BbsController {
 
         message.setName(form.getName());
         message.setMessage(form.getMessage());
+        message.setDeletePassword(form.getDeletePassword());
         
         // メッセージ登録処理
         boolean result = bbsService.insert(message);

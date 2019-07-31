@@ -25,10 +25,12 @@ public class BbsDaoJdbcImpl implements BbsDao {
         // １件登録
         int rowNumber = jdbc.update("INSERT INTO message(name,"
                 + " message,"
-                + " date)"
-                + " VALUES (?, ?, current_timestamp AT TIME ZONE 'Asia/Tokyo')"
+                + " date,"
+                + " deletePassword)"
+                + " VALUES (?, ?, current_timestamp AT TIME ZONE 'Asia/Tokyo', ?)"
                 ,message.getName()
-                ,message.getMessage());
+                ,message.getMessage()
+                ,message.getDeletePassword());
 
         return rowNumber;
     }
@@ -54,6 +56,7 @@ public class BbsDaoJdbcImpl implements BbsDao {
             message.setName((String)map.get("name"));
             message.setMessage((String)map.get("message"));
             message.setDate((Date)map.get("date"));
+            message.setDeletePassword((String)map.get("deletepassword"));
 
             // 結果返却用のListに追加
             messageList.add(message);

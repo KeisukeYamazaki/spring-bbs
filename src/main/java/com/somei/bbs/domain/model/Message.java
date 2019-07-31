@@ -10,4 +10,5 @@ public class Message {
     private String name;
     private String message;
     private Date date;
+    private String deletePassword;
 }

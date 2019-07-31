@@ -12,10 +12,11 @@
     <form method="post" action="/index" th:object="${messageForm}">
         <div class="name">
             <span class="label">名前:</span><input type="text" th:field="*{name}">
+            <span class="label">　削除用パスワード:</span><input type="password" th:field="*{deletePassword}">
         </div>
         <br/>
         <div class="message">
-            <span class="label">本文:</span><textarea cols="50" rows="3" wrap="hard" th:field="*{message}"></textarea>
+            <span class="label">本文:</span><textarea cols="66" rows="5" wrap="hard" th:field="*{message}"></textarea>
 
         </div>
         <input type="submit" value="投稿">
