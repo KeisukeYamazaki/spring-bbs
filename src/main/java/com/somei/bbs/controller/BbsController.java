@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -41,9 +40,6 @@ public class BbsController {
 
         message.setName(form.getName());
         message.setMessage(form.getMessage());
-        // 現在時刻を取得してmessageにセット
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        message.setDate(timestamp);
 
         // メッセージ登録処理
         boolean result = bbsService.insert(message);
