@@ -35,4 +35,27 @@ public class BbsService {
         // 全件取得
         return dao.selectMany();
     }
+
+    // １件取得用メソッド
+    public Message selectOne(int auto_no) {
+        // selectOne 実行
+        return dao.selectOne(auto_no);
+    }
+
+    // １件削除メソッド
+    public boolean deleteOne(int auto_no) {
+
+        // １件削除
+        int rowNumber = dao.deleteOne(auto_no);
+
+        // 判定用変数
+        boolean result = false;
+
+        if(rowNumber > 0) {
+            // delete成功
+            result = true;
+        }
+
+        return result;
+    }
 }

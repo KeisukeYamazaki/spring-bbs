@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -54,5 +55,32 @@ public class BbsController {
 
         // リダイレクト
         return "redirect:/index";
+    }
+
+    @PostMapping(value ="/index", params = "delete")
+    public String postDeleteIndex(@ModelAttribute MessageForm form,
+                                  @RequestParam(name ="deletepass")String deletepass,
+                                  @RequestParam(name ="number")int num,
+                                  Model model) {
+
+        System.out.println("削除ボタンの処理");
+
+        // メッセージの情報を取得（selectOne）
+        Message message = bbsService.selectOne(num);
+
+        // 削除実行
+        if(message.getDeletePassword().equals(deletepass)) {
+            boolean result = bbsService.deleteOne(num);
+
+            if(result == true) {
+                model.addAttribute("result", "削除しました");
+            } else {
+                model.addAttribute("result","削除できませんでした");
+            }
+        } else {
+            model.addAttribute("result","削除パスワードが違うため、削除できません");
+        }
+
+        return getIndex(form, model);
     }
 }

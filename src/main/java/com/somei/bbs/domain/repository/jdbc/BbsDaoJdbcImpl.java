@@ -35,6 +35,24 @@ public class BbsDaoJdbcImpl implements BbsDao {
         return rowNumber;
     }
 
+    @Override
+    public Message selectOne(int auto_no) throws DataAccessException {
+
+        Map<String, Object> map = jdbc.queryForMap("SELECT * FROM message WHERE auto_no = ?" ,auto_no);
+
+        // 結果返却用の変数
+        Message message = new Message();
+
+        // 取得したデータを結果返却用の変数にセットしていく
+        message.setAuto_no((Integer)map.get("auto_no"));
+        message.setName((String)map.get("name"));
+        message.setMessage((String)map.get("message"));
+        message.setDate((Date)map.get("date"));
+        message.setDeletePassword((String)map.get("deletepassword"));
+
+        return message;
+    }
+
     // 全データを取得
     @Override
     public List<Message> selectMany() throws DataAccessException {
@@ -65,9 +83,13 @@ public class BbsDaoJdbcImpl implements BbsDao {
         return messageList;
     }
 
-    //
+    // 投稿を１件削除
     @Override
     public int deleteOne(int auto_no) throws DataAccessException {
-        return 0;
+
+        // １件削除
+        int rowNumber = jdbc.update("DELETE FROM message WHERE auto_no = ?", auto_no);
+
+        return  rowNumber;
     }
 }
