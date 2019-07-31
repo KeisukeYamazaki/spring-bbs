@@ -40,7 +40,7 @@ public class BbsController {
 
         message.setName(form.getName());
         message.setMessage(form.getMessage());
-
+        
         // メッセージ登録処理
         boolean result = bbsService.insert(message);
 
